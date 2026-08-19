@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>DOM Manipulation</title>
+  <style>
+    #content {
+      padding: 20px;
+      background-color: lightblue;
+      border: 2px solid navy;
+      margin-top: 10px;
+    }
+    .highlight {
+      color: rgb(218, 11, 11);
+      background-color: rgb(60, 0, 100);
+      font-weight: bold;
+    }
+    /* Style for the heading */
+    h1 {
+      text-align: center;
+      font-size: 3em;          
+      border: 4px solid navy;  
+      padding: 15px;           
+      background-color: #f0f8ff; 
+      color: darkred;          
+      border-radius: 10px;     
+      width: 80%;              
+      margin: 20px auto;       
+    }
+  </style>
+</head>
+<body>
+  <h1>Javascript Demo</h1>
+
+  <button onclick="toggleContent()">Hide/Show Content</button>
+  <button onclick="changeText()">Change Text</button>
+  <button onclick="changeStyle()">Change Style</button>
+  <button onclick="showName()">Show Element Name</button>
+  <button onclick="showClass()">Show Element Class</button>
+
+  <div id="content">
+    <p id="text">This is experiment number 6 of JavaScript.</p>
+  </div>
+
+  <script>
+    function toggleContent() {
+      const content = document.getElementById("content");
+      if (content.style.display === "none") {
+        content.style.display = "block";
+      } else {
+        content.style.display = "none";
+      }
+    }
+
+    function changeText() {
+      const text = document.getElementById("text");
+      text.innerHTML = "The text has been changed dynamically!";
+    }
+
+    function changeStyle() {
+      const content = document.getElementById("content");
+      content.classList.toggle("highlight"); 
+    }
+
+    function showName() {
+      const content = document.getElementById("content");
+      alert("Name: Aditi Sawant" + content.className);
+    }
+
+    function showClass() {
+      const content = document.getElementById("content");
+      alert("Class: SYB" + content.className);
+    }
+  </script>
+</body>
+</html>

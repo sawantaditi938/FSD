@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Weather App - jQuery AJAX</title>
+
+    <!-- jQuery CDN -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            padding: 20px;
+        }
+
+        .weather-box {
+            margin-top: 20px;
+            padding: 15px;
+            width: 300px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px #aaa;
+            display: none;
+        }
+
+        button {
+            padding: 8px 15px;
+            cursor: pointer;
+        }
+
+        #loading {
+            color: blue;
+            display: none;
+        }
+    </style>
+</head>
+<body>
+
+    <h2>🌦 Weather Information (AJAX)</h2>
+
+    <!-- Example: Solapur coordinates -->
+    <input type="number" id="lat" placeholder="Latitude (e.g. 17.66)">
+    <input type="number" id="lon" placeholder="Longitude (e.g. 75.90)">
+    <br><br>
+
+    <button id="getWeather">Get Weather</button>
+
+    <p id="loading">Fetching weather data...</p>
+
+    <div class="weather-box" id="weatherResult">
+        <p><strong>Temperature:</strong> <span id="temp"></span> °C</p>
+        <p><strong>Wind Speed:</strong> <span id="wind"></span> km/h</p>
+        <p><strong>Weather Code:</strong> <span id="code"></span></p>
+    </div>
+
+    <script>
+        $(document).ready(function () {
+
+            $("#getWeather").click(function () {
+
+                let lat = $("#lat").val();
+                let lon = $("#lon").val();
+
+                if (lat === "" || lon === "") {
+                    alert("Please enter latitude and longitude");
+                    return;
+                }
+
+                $("#weatherResult").hide();
+                $("#loading").show();
+
+                $.ajax({
+                    url: "https://api.open-meteo.com/v1/forecast",
+                    method: "GET",
+                    data: {
+                        latitude: lat,
+                        longitude: lon,
+                        current_weather: true
+                    },
+                    dataType: "json",
+
+                    success: function (data) {
+                        let weather = data.current_weather;
+
+                        $("#temp").text(weather.temperature);
+                        $("#wind").text(weather.windspeed);
+                        $("#code").text(weather.weathercode);
+
+                        $("#loading").hide();
+                        $("#weatherResult").fadeIn();
+                    },
+
+                    error: function () {
+                        $("#loading").hide();
+                        alert("Failed to fetch weather data!");
+                    }
+                });
+
+            });
+
+        });
+    </script>
+
+</body>
+</html>

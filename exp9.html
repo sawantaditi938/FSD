@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>jQuery Dynamic Webpage</title>
+
+    <!-- jQuery CDN -->
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+
+    <style>
+        body {
+            font-family: Arial;
+            padding: 20px;
+        }
+
+        .box {
+            width: 200px;
+            height: 100px;
+            background-color: steelblue;
+            color: white;
+            text-align: center;
+            line-height: 100px;
+            margin-top: 20px;
+            border-radius: 8px;
+        }
+
+        #hoverBox {
+            background: tomato;
+            cursor: pointer;
+        }
+
+        #output {
+            margin-top: 10px;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+
+    <h2>🎯 jQuery Event & Animation Demo</h2>
+
+    <!-- Click Event -->
+    <button id="btn">Click Me</button>
+    <div class="box" id="clickBox">Click Animation</div>
+
+    <!-- Hover Event -->
+    <div class="box" id="hoverBox">Hover Over Me</div>
+
+    <!-- Form Input -->
+    <h3>Live Input</h3>
+    <input type="text" id="name" placeholder="Type your name" />
+    <p id="output"></p>
+
+    <!-- Form Submit -->
+    <h3>Form Example</h3>
+    <form id="myForm">
+        <input type="email" id="email" placeholder="Enter email" required />
+        <br><br>
+        <button type="submit">Submit</button>
+    </form>
+
+    <script>
+        $(document).ready(function () {
+
+            // Click Event with Animation
+            $("#btn").click(function () {
+                $("#clickBox")
+                    .fadeOut(600)
+                    .slideDown(500)
+                    .fadeIn(500);
+            });
+
+            // Hover Event
+            $("#hoverBox").hover(
+                function () {
+                    $(this).animate({ width: "320px" }, 300);
+                },
+                function () {
+                    $(this).animate({ width: "200px" }, 300);
+                }
+            );
+
+            // Input Event (Live typing)
+            $("#name").keyup(function () {
+                $("#output").text("Hello, " + $(this).val());
+            });
+
+            // Form Submit Event
+            $("#myForm").submit(function (e) {
+                e.preventDefault();
+                alert("Form submitted successfully!");
+                $(this).slideUp();
+            });
+
+        });
+    </script>
+</body>
+</html>
